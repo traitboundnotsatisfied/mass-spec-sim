@@ -12,15 +12,24 @@ ctx.fillCircle = (x, y, r) => {
     ctx.fill();
 };
 
+ctx.screenSpaceX = (x, sc) => Math.floor((ctx.w / 2) + (x * sc));
+ctx.screenSpaceY = (y, sc) => Math.floor((ctx.h / 4) + (y * sc));
 ctx.isInBounds = (arr, sc) => {
-    let x = (ctx.w / 2) + (arr[0] * sc);
-    let y = (ctx.h / 2) + (arr[1] * sc);
+    let x = ctx.screenSpaceX(arr[0], sc);
+    let y = ctx.screenSpaceY(arr[1], sc);
     return (x >= 0) && (y >= 0) && (x <= ctx.w) && (y <= ctx.h);
 };
 
 var defaultCfg = {
     type: "single-sector",
-    dt_s: 0.01,
+    dt_s: 0.001,
+    instr: {
+        plateDist_m: 0.01,
+        plateCharge_C: 1e-18,
+        bFieldStrength_T: 5e-6,
+        bFieldStart_m: 0.2,
+        bFieldEnd_m: 0.4,
+    },
     particleTypes: [
         {
             attrs: {
@@ -44,6 +53,7 @@ var defaultCfg = {
 };
 
 var mass_kg = particle => particle.attrs.mass_amu * 1.66054e-27;
+var charge_C = particle => particle.attrs.charge * 1.60218e-19;
 
 var badType = () => {
     throw new Error("Bad type");
