@@ -28,7 +28,7 @@ function simulate(cfg) {
                     particles[i].pos[j] += particles[i].vel[j] * cfg.dt_s;
                 }
                 particles[i].active &&= isActive(cfg.type, particles[i].pos);
-                particles[i].active &&= ctx.isInBounds(particles[u].pos);
+                particles[i].active &&= ctx.isInBounds(particles[i].pos, SCALE);
             }
         }
         if (someActive) requestAnimationFrame(animate); else render();
@@ -48,7 +48,7 @@ function computeForce_N(type, particle) {switch (type) {
 
 function isActive(type, pos) {switch (type) {
     case "single-sector":
-        return 
+        return true;
 }; badType()}
 
 function drawParticle(particle) {
