@@ -13,3 +13,11 @@ main {
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: calc(100vh - (2 * var(--main-margin)));
 }
+
+.config-panel {
+    font-size: larger;
+}
+
+.config-panel select {
+    font-size: larger;
+}

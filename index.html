@@ -12,8 +12,12 @@
         <div id="canvas_parent">
             <canvas id="canvas"></canvas>
         </div>
-        <div x-data="{ cfg: structuredClone(defaultCfg) }">
-            <p>inputs go here</p>
+        <div x-data="{ cfg: structuredClone(defaultCfg) }" class="config-panel">
+            <label for="type">Mass Spectrometer Type:</label> 
+            <select id="type" x-model="cfg.type">
+                <option value="single-sector">Single-Sector (Traditional MS)</option>
+                <option value="fticr-2d">Fourier Transform Ion Cyclotron Resonance (FTICR-MS, 2D)</option>
+            </select>
             <div x-effect="simulate(cfg)"></div>
         </div>
     </main>
