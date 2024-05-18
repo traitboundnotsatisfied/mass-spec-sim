@@ -31,7 +31,7 @@ function simulate(cfg) {
                     particles[i].vel[j] += (force_N[j] / mass_kg(particles[i])) * cfg.dt_s;
                     particles[i].pos[j] += particles[i].vel[j] * cfg.dt_s;
                 }
-                particles[i].active &&= isActive(cfg.type, particles[i].pos);
+                particles[i].active &&= isActive(cfg, particles[i].pos);
                 particles[i].active &&= ctx.isInBounds(particles[i].pos, SCALE);
             }
         }
@@ -64,12 +64,13 @@ function computeForce_N(cfg, particle) {switch (cfg.type) {
         return [fx, fy];
 }; badType()}
 
-function isActive(type, pos) {switch (type) {
+function isActive(cfg, pos) {switch (cfg.type) {
     case "single-sector":
-        return true;
+        return pos[1] < cfg.instr.detectorDist_m;
 }; badType()}
 
 function renderParticle(particle) {
+    console.log(randn());
     ctx.fillStyle = particle.attrs.color;
     ctx.fillCircle(
         ctx.screenSpaceX(particle.pos[0], SCALE),
@@ -92,6 +93,11 @@ function renderInstrument(cfg) {switch (cfg.type) {
             let y1 = ctx.screenSpaceY(cfg.instr.bFieldStart_m, SCALE);
             let y2 = ctx.screenSpaceY(cfg.instr.bFieldEnd_m, SCALE);
             ctx.fillRect(0, y1, ctx.w, y2 - y1);
+        }
+        {
+            ctx.fillStyle = "orange";
+            let y = ctx.screenSpaceY(cfg.instr.detectorDist_m, SCALE);
+            ctx.fillRect(0, y, ctx.w, LINEWIDTH);
         }
         return;
 }; badType()}
