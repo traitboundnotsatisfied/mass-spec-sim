@@ -1,2 +1,2 @@
 # mass-spec-sim
-Web Simulations of Mass Spectrometers (Echo + Templ + HTMX)
+Web Simulations of Mass Spectrometers
