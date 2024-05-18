@@ -1,0 +1,10 @@
+body {
+    --body-margin: 8px;
+    margin: var(--body-margin);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: calc(100vh - (2 * var(--body-margin)));
+}
