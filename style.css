@@ -1,6 +1,8 @@
 body {
     --body-margin: 8px;
     margin: var(--body-margin);
+    background: #333;
+    color: white;
 }
 
 main {

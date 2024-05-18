@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="style.css">
     <title>Mass Spectrometer Sim</title>
 </head>
-<body>
+<body id="body">
     <main>
         <div id="canvas_parent">
             <canvas id="canvas"></canvas>
+            <div x-effect="reset(); simulate()"></div>
         </div>
-        <div>inputs go here</div>
+        <div>
+            <p>inputs go here</p>
+        </div>
     </main>
-    <script>
-    canvas.width = canvas_parent.getBoundingClientRect().width;
-    canvas.height = canvas_parent.getBoundingClientRect().height;
-    </script>
+    <script src="setup_canvas.js"></script>
+    <script src="simulate.js"></script>
 </body>
 </html>
