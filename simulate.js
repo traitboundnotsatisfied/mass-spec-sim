@@ -40,9 +40,11 @@ function simulate(cfg) {
     animate();
 }
 
-function startingPosition_m(type, _prog) {switch (type) {
+const SPREAD = 0.0001;
+
+function startingPosition_m(type, prog) {switch (type) {
     case "single-sector":
-        return [0, 0];
+        return [0, prog * SPREAD];
 }; badType()}
 
 const KE = 8.98755e9;
@@ -70,7 +72,6 @@ function isActive(cfg, pos) {switch (cfg.type) {
 }; badType()}
 
 function renderParticle(particle) {
-    console.log(randn());
     ctx.fillStyle = particle.attrs.color;
     ctx.fillCircle(
         ctx.screenSpaceX(particle.pos[0], SCALE),
