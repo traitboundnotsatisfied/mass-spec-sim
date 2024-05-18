@@ -40,11 +40,11 @@ function simulate(cfg) {
     animate();
 }
 
-const SPREAD = 0.0001;
+const SPREAD = 0.0005;
 
 function startingPosition_m(type, prog) {switch (type) {
     case "single-sector":
-        return [0, prog * SPREAD];
+        return [0, (prog - 0.5) * SPREAD];
 }; badType()}
 
 const KE = 8.98755e9;
@@ -54,7 +54,7 @@ function computeForce_N(cfg, particle) {switch (cfg.type) {
         let fx = 0;
         let fy = 0;
         let y = particle.pos[1];
-        let r = Math.abs(y - cfg.instr.plateDist_m);
+        let r = y + cfg.instr.plateDist_m;
         let z = charge_C(particle);
         let columbForce = KE * z * cfg.instr.plateCharge_C / (r * r);
         fy += columbForce;
@@ -86,7 +86,7 @@ function renderInstrument(cfg) {switch (cfg.type) {
     case "single-sector":
         {
             ctx.fillStyle = "purple";
-            let y = ctx.screenSpaceY(cfg.instr.plateDist_m, SCALE);
+            let y = ctx.screenSpaceY(-cfg.instr.plateDist_m, SCALE);
             ctx.fillRect(0, y, ctx.w, LINEWIDTH);
         }
         {

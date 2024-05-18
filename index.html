@@ -12,16 +12,50 @@
         <div id="canvas_parent">
             <canvas id="canvas"></canvas>
         </div>
-        <div x-data="{ cfg: structuredClone(defaultCfg) }" class="config-panel">
+        <div x-data class="config-panel">
+            <h3>Instrument Configuration:</h3>
             <label for="type">Mass Spectrometer Type:</label> 
-            <select id="type" x-model="cfg.type">
+            <select id="type" x-model="$store.cfg.type">
                 <option value="single-sector">Single-Sector (Traditional MS)</option>
                 <option value="fticr-2d">Fourier Transform Ion Cyclotron Resonance (FTICR-MS, 2D)</option>
             </select>
-            <div x-effect="simulate(cfg)"></div>
+            <br/>
+            <template x-if="$store.cfg.type === 'single-sector'"><div>
+                <label for="plate-dist">Distance to charged plate (m):</label>
+                <input id="plate-dist" type="text" x-model.number="$store.cfg.instr.plateDist_m">
+                <br/>
+                <label for="plate-charge">Charge of charged plate (C):</label>
+                <input id="plate-charge" type="text" x-model.number="$store.cfg.instr.plateCharge_C">
+                <br/>
+                <label for="b-start">Distance to start of the magnet (m):</label>
+                <input id="b-start" type="text" x-model.number="$store.cfg.instr.bFieldStart_m">
+                <br/>
+                <label for="b-end">Distance to the end of the magnet (m):</label>
+                <input id="b-end" type="text" x-model.number="$store.cfg.instr.bFieldEnd_m">
+                <br/>
+                <label for="b-strength">Magnetic field strength (T):</label>
+                <input id="b-strength" type="text" x-model.number="$store.cfg.instr.bFieldStrength_T">
+                <br/>
+                <label for="det-dist">Distance to detector (m):</label>
+                <input id="det-dist" type="text" x-model.number="$store.cfg.instr.detectorDist_m">
+                <br/>
+            </div></template>
+            <template x-if="$store.cfg.type === 'fticr-2d'"><div>
+                <h1 style="background-color: red;">FTICR not yet supported (sorry!)</h1>
+            </div></template>
+            <h3>Simulation Configuration:</h3>
+            <label for="sim-dt">Simulation step duration (s):</label>
+            <input id="sim-dt" type="text" x-model.number="$store.cfg.dt_s">
+            <div x-effect="simulate($store.cfg)"></div>
         </div>
     </main>
     <script src="setup.js"></script>
     <script src="simulate.js"></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('cfg', structuredClone(defaultCfg));
+            Alpine.store('hi', {'there': 'bob'});
+        });
+    </script>
 </body>
 </html>

@@ -15,9 +15,9 @@ main {
 }
 
 .config-panel {
-    font-size: larger;
+    margin: 10px;
 }
 
-.config-panel select {
+.config-panel, .config-panel select, .config-panel input {
     font-size: larger;
 }
