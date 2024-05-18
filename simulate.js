@@ -87,5 +87,11 @@ function renderInstrument(cfg) {switch (cfg.type) {
             let y = ctx.screenSpaceY(cfg.instr.plateDist_m, SCALE);
             ctx.fillRect(0, y, ctx.w, LINEWIDTH);
         }
+        {
+            ctx.fillStyle = "green";
+            let y1 = ctx.screenSpaceY(cfg.instr.bFieldStart_m, SCALE);
+            let y2 = ctx.screenSpaceY(cfg.instr.bFieldEnd_m, SCALE);
+            ctx.fillRect(0, y1, ctx.w, y2 - y1);
+        }
         return;
 }; badType()}
