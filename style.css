@@ -1,12 +1,15 @@
-body {
-    --body-margin: 8px;
-    margin: var(--body-margin);
+html {
     background: #333;
     color: white;
+}
+
+body {
+    --main-margin: 8px;
+    margin: var(--main-margin);
 }
 
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-auto-rows: calc(100vh - (2 * var(--body-margin)));
+    grid-auto-rows: calc(100vh - (2 * var(--main-margin)));
 }
